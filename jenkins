@@ -13,11 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building...'
-                sh 'curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh'
-                sh 'bash nodesource_setup.sh'
-                sh 'apt install nodejs -y'
-                sh 'apt-get update'
-                sh 'npm install'
+
             }
         }
         stage('Test') {
