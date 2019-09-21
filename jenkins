@@ -1,0 +1,30 @@
+#!/usr/bin/env groovy
+
+pipeline {
+
+    agent {
+        docker {
+            image 'ubuntu:18:04'
+            args '-u root'
+        }
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building...'
+                sh 'curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh'
+                sh 'bash nodesource_setup.sh'
+                sh 'apt install nodejs -y'
+                sh 'apt-get update'
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing...'
+                sh 'npm test'
+            }
+        }
+    }
+}
